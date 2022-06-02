@@ -2,6 +2,11 @@
 
 Tic tac toe game build in ReactJS
 
+## Screenshots
+
+![Game Board](/screenshots/game.png?raw=true "Game Board")
+![Winner Screen](/screenshots/winnerScreen.png?raw=true "Winner Screen")
+
 ## Features Overview
 
 - 
