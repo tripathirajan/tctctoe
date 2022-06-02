@@ -2,9 +2,14 @@
 
 Tic tac toe game build in ReactJS
 
-## Functionality Overview
+## Features Overview
+
+- 
 
 
+## Pending Features
+
+- Restart game after finish
 ## Technology Used
 
 - [ReactJS] frontent ui library written in JS
