@@ -3,11 +3,33 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { Provider } from 'react-redux'
+import { createTheme, ThemeProvider, StyledEngineProvider } from '@mui/material/styles';
+import { deepPurple } from '@mui/material/colors';
+import { CssBaseline } from '@mui/material';
+import { store } from './store';
+const _color = deepPurple;
 
+const theme = createTheme({
+  palette: {
+    mode: 'dark',
+    background: {
+      default: _color[900],
+      paper: _color[800]
+    }
+  }
+});
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <StyledEngineProvider injectFirst>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <App />
+        </ThemeProvider>
+      </StyledEngineProvider>
+    </Provider>
   </React.StrictMode>
 );
 
