@@ -1,5 +1,5 @@
 
-import { createSlice, current } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 import { calculateWinner, get2DEmptyMatrix, checkForDraw } from '../../helper'
 import {
     GAME_STATUS_PLAYING,
@@ -87,7 +87,9 @@ export const gameSlice = createSlice({
             const nextPlayer = players.find(player => player.value !== value.toString());
             state.activePlayer = nextPlayer;
         },
-        resetGame: (state, action) => { },
+        resetGame: (state, action) => {
+            return initialState;
+        },
         stopCelebration: (state) => {
             state.showCelebration = false;
         }
@@ -96,6 +98,6 @@ export const gameSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { markCell, setNextActivePlayer, stopCelebration } = gameSlice.actions
+export const { markCell, setNextActivePlayer, stopCelebration, resetGame } = gameSlice.actions
 
 export default gameSlice.reducer

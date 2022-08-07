@@ -1,12 +1,21 @@
 import React, { useEffect } from 'react'
-import { Container, Stack } from '@mui/material';
+import { Container, Stack, IconButton } from '@mui/material';
 import Logo from '../components/Logo';
 import Players from './Players';
 import Celebrate from '../components/Celebrate';
 import PlayingBoard from './PlayingBoard';
 import { useDispatch, useSelector } from 'react-redux';
 import Anouncement from './Anouncement';
-import { stopCelebration } from '../store/slices/GameSlice';
+import { stopCelebration, resetGame } from '../store/slices/GameSlice';
+import { styled } from '@mui/material/styles';
+import { yellow } from '@mui/material/colors';
+import RestartAltIcon from '@mui/icons-material/RestartAlt';
+
+const RestartButton = styled(IconButton)({
+    color: yellow[800],
+    fontSize: '1.5rem',
+    fontWeight: '800'
+});
 
 /**
  * 
@@ -16,7 +25,7 @@ const GameBoard = () => {
     const dispatch = useDispatch();
     const showCelebration = useSelector(state => state.game.showCelebration)
     const showAnnouncement = useSelector(state => state.game.showAnnouncement)
-
+    const [showBoard, setShowBoard] = React.useState(false);
     useEffect(() => {
         if (showCelebration) {
             setTimeout(() => {
@@ -24,6 +33,18 @@ const GameBoard = () => {
             }, 5000)
         }
     }, [showCelebration, dispatch]);
+
+    useEffect(() => {
+        if (showAnnouncement) {
+            setTimeout(() => {
+                setShowBoard(true)
+            }, 1000)
+        }
+    }, [showAnnouncement])
+    const handleRestart = () => {
+        dispatch(resetGame());
+    }
+
     return (
         <Container maxWidth="lg">
             <Celebrate show={showCelebration} />
@@ -37,7 +58,14 @@ const GameBoard = () => {
                 <Logo />
                 <Players />
                 {
-                    showAnnouncement ? <Anouncement /> : <PlayingBoard />
+                    showBoard ? (<><Anouncement />
+                        <RestartButton
+                            onClick={handleRestart}
+                            variant="contained"
+                            color="secondary">
+                            <RestartAltIcon sx={{ fontSize: '5rem' }} />
+                        </RestartButton></>)
+                        : <PlayingBoard />
                 }
 
             </Stack>
