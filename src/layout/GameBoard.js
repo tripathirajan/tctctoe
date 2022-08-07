@@ -23,6 +23,7 @@ const RestartButton = styled(IconButton)({
  */
 const GameBoard = () => {
     const dispatch = useDispatch();
+
     const showCelebration = useSelector(state => state.game.showCelebration)
     const showAnnouncement = useSelector(state => state.game.showAnnouncement)
     const [showBoard, setShowBoard] = React.useState(false);
@@ -42,7 +43,7 @@ const GameBoard = () => {
         }
     }, [showAnnouncement])
     const handleRestart = () => {
-        dispatch(resetGame());
+        window.location.reload();
     }
 
     return (
