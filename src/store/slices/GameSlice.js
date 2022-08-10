@@ -51,6 +51,9 @@ export const gameSlice = createSlice({
             const { playingBoard, activePlayer, players } = state;
             const { value } = activePlayer;
             const matrixClone = [...playingBoard];
+            if (matrixClone[row][col]) {
+                return;
+            }
             matrixClone[row][col] = value;
             const winningPlayer = calculateWinner(matrixClone);
             if (winningPlayer) {
@@ -80,6 +83,10 @@ export const gameSlice = createSlice({
                 }
             }
             state.playingBoard = matrixClone;
+            // activate next player
+            const activePlayerValue = activePlayer?.value;
+            const nextPlayer = players.find(player => player.value !== activePlayerValue.toString());
+            state.activePlayer = nextPlayer;
         },
         setNextActivePlayer: (state) => {
             const { players, activePlayer } = state;

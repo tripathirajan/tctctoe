@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Card, CardContent, Stack } from '@mui/material';
 import SquareBox from '../components/SquareBox';
 import { useDispatch, useSelector } from 'react-redux';
-import { markCell, setNextActivePlayer } from '../store/slices/GameSlice';
+import { markCell } from '../store/slices/GameSlice';
 
 const PlayingBoard = () => {
     const dispatch = useDispatch();
@@ -14,7 +14,6 @@ const PlayingBoard = () => {
             e.preventDefault();
         }
         dispatch(markCell({ row, col }));
-        dispatch(setNextActivePlayer());
     }
 
     return (

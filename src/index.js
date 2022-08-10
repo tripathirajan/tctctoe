@@ -17,7 +17,7 @@ const theme = createTheme({
     mode: 'dark',
     background: {
       default: _color[900],
-      paper: _color[800]
+      paper: _color[500]
     }
   }
 });
